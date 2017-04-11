@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <title>BMI Calculator</title>
+</head>
+<body>
+<h3>BMI Claculator</h3>
+<label><input name="unit" value="metric" type="radio"> Metric </label><br>
+<label><input name="unit" value="english" type="radio"> English </label><br>
+<label>Height <input name="height" placeholder="Enter your height" type="number"></label><br>
+<label>Weight <input name="weight" placeholder="Enter your weight" type="number"></label><br>
+<button id="calculate">Calculate</button>
+<div id="output"></div>
+<script>
+ // Create a new JavaScript control class BMICalculator that has all the necessary functions 
+
+ class BMICalculator{
+   constructor(height, weight, unit){
+      this.height = height;
+      this.weight = weight;
+      this.unit = unit;
+   }
+   getBMIvalue(){
+     if(this.unit == "english"){
+        this.height*=0.45;
+        this.weight*=0.025;
+
+     }
+     return this.weight/(this.height*this.height);
+   }
+
+   getBMIStatus(){
+     let BMIvalue = this.getBMIvalue();
+     if(BMIvalue <= 18.5){
+        return "underweight";
+     }else if(BMIvalue < 25){
+        return "normal weight";
+     } else if(BMIvalue < 30){
+      return "overweight";  
+     } else{
+        return "obesity";
+     } 
+   }
+
+ }
+ 
+ // Write code to make sure all inputs are valid. If not valid, give appropriate response to indicate it is invalid and that it needs to be corrected.
+
+document.getElementById('calculate').addEventListener('click', onClick);
+function onClick(){
+
+  const unitDom = document.querySelector('input[name="unit"]:checked');
+  const weight = document.getElementsByName('weight')[0].value;
+  const height = document.getElementsByName('height')[0].value;
+
+  let outMsg = "";
+  let BMOCal = new BMICalculator(height, weight, unitDom.value);
+
+  if(unitDom == null || unitDom.value ==''){
+    outMsg = "please select unit";
+
+   
+  }
+  if(weight < 0){
+    outMsg = "weight more than 0";
+    
+  }
+  if(height < 0){
+    outMsg = "height more than 0";
+    
+  }
+  else{
+      
+      outMsg = "BMI is " + BMOCal.getBMIvalue();
+      outMsg+=", "+BMOCal.getBMIStatus();
+      
+  }
+
+  document.getElementById('output').innerHTML = outMsg;
+
+}
+ // Use the BMICalculator class for calculations. Show BMI value and the status.
+
+</script>
+
+
+</body></html>

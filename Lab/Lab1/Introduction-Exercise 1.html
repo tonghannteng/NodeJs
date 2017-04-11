@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <title>Arrow Functions</title>
+</head>
+<body>
+
+<ul>
+  <li data-time="5:17">NodeJs Video</li>
+  <li data-time="8:22">NodeJs Video</li>
+  <li data-time="3:34">AngularJs Video</li>
+  <li data-time="5:23">NodeJs Video</li>
+  <li data-time="7:12">NodeJs Video</li>
+  <li data-time="7:24">AngularJs Video</li>
+  <li data-time="6:46">NodeJs Video</li>
+  <li data-time="4:45">NodeJs Video</li>
+  <li data-time="4:40">NodeJs Video</li>
+  <li data-time="7:58">AngularJs Video</li>
+  <li data-time="11:51">NodeJs Video</li>
+  <li data-time="9:13">NodeJs Video</li>
+  <li data-time="5:50">NodeJs Video</li>
+  <li data-time="5:52">AngularJs Video</li>
+  <li data-time="5:49">NodeJs Video</li>
+  <li data-time="8:57">NodeJs Video</li>
+  <li data-time="11:29">NodeJs Video</li>
+  <li data-time="3:07">NodeJs Video</li>
+  <li data-time="5:59">AngularJs Video</li>
+  <li data-time="3:31">NodeJs Video</li>
+</ul>
+
+<script>
+
+  // Select all the list items on the page and convert to array
+  const items = Array.from(document.querySelectorAll('[data-time]'))
+
+  // Filter for only the elements that contain the word 'NodeJs'
+  const arr1 = items.filter(function(currentValue, index, array){
+    return currentValue.innerText.includes("NodeJs");
+  });
+
+  // map down to a list of time strings
+  const arr2 = items.map(function(currentValue, index, array){
+    return currentValue.getAttribute('data-time')
+  });
+  console.log(arr2);
+  // map to an array of seconds
+  const arr3 = items.map(function(currentValue, index, array){
+    let mTime = currentValue.getAttribute('data-time');
+    let mTimeArr = mTime.split(":");
+    return parseInt(mTimeArr[0])*60 + parseInt(mTimeArr[1]);
+    // return mTimeArr[0];
+  });
+  console.log(arr3);
+
+  // reduce to get total
+  const total = arr3.reduce(function(previous, currentValue, index, array){
+    return previous + currentValue;
+  });
+  console.log(total)
+
+  // This can also be done in a single .reduce(), but we're practicing arrow functions here, so chain them!
+  const secondTotal = arr3.reduce((a,b) => a+b);
+  console.log(secondTotal);
+
+</script>
+
+
+</body></html>
