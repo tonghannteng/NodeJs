@@ -1,4 +1,4 @@
-./mongoimport -d dbName -c restaurants restaurants.json
+./mongoimport -d dbName -c restaurants /Users/tonghannteng/Documents/MWA/Lab/Lab8/restaurants.json
 1. db.restaurants.find().pretty()
 
 2. db.restaurants.find({}, {restaurant_id:1, name:1, district:1, cuisine:1}).pretty()
@@ -37,7 +37,7 @@
 
 19. db.restaurants.find().sort({name: -1})pretty();
 
-20.
+20. db.restaurants.find().sort({cuisine:1, district:-1}).pretty();
 
 21. db.restaurants.find({"address.street": {$exists: true}});
 
